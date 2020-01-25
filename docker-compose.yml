@@ -30,7 +30,7 @@ services:
       - /etc/timezone:/etc/timezone:ro
       - /var/local/dcm4chee-arc/keycloak:/opt/keycloak/standalone
   arc:
-    image: dcm4che/dcm4chee-arc-psql:5.20.0-secure-ui
+    image: lucasmazevedo/dcm4chee-arc-light-mysql
     ports:
       - "8080:8080"
       - "8443:8443"
