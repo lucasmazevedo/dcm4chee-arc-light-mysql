@@ -1,8 +1,8 @@
 # Supported tags and respective `Dockerfile` links
 
-- [`5.21.0` (*5.21.0/Dockerfile*)](https://github.com/dcm4che-dockerfiles/dcm4chee-arc-psql/blob/5.21.0/Dockerfile)
-- [`5.21.0-secure` (*5.21.0-secure/Dockerfile*)](https://github.com/dcm4che-dockerfiles/dcm4chee-arc-psql/blob/5.21.0-secure/Dockerfile)
-- [`5.21.0-secure-ui` (*5.21.0-secure-ui/Dockerfile*)](https://github.com/dcm4che-dockerfiles/dcm4chee-arc-psql/blob/5.21.0-secure-ui/Dockerfile)
+- [`5.20.0` (*5.20.0/Dockerfile*)](https://github.com/dcm4che-dockerfiles/dcm4chee-arc-psql/blob/5.20.0/Dockerfile)
+- [`5.20.0-secure` (*5.20.0-secure/Dockerfile*)](https://github.com/dcm4che-dockerfiles/dcm4chee-arc-psql/blob/5.20.0-secure/Dockerfile)
+- [`5.20.0-secure-ui` (*5.20.0-secure-ui/Dockerfile*)](https://github.com/dcm4che-dockerfiles/dcm4chee-arc-psql/blob/5.20.0-secure-ui/Dockerfile)
 
 ## How to use this image
 
@@ -91,13 +91,9 @@ Specifies if reverse DNS lookup is enabled for incoming DICOM and HL7 connection
 This environment variable is used to set the ownership to the storage directory (optional, default is 
 `"/opt/wildfly/standalone /storage"`
 
-#### `HTTP_MAX_POST_SIZE`
-
-The maximum size of a HTTP POST request that will be accepted, in bytes. (optional, default is `10000000000`).
-
 #### `HTTP_PORT`
 
-HTTP port of Wildfly (optional, default is `8080`).
+HTTP port of Keycloak (optional, default is `8080`).
 
 #### `HTTPS_PORT`
 
@@ -251,39 +247,14 @@ This environment variable sets the maximum threads allowed for the managed-execu
 This environment variable sets the maximum pool size allowed for the PacsDS datasource in the Wildfly configuration
 (optional, default is `50`).
 
-#### `WILDFLY_JMS_GLOBAL_CLIENT_THREAD_POOL_MAX_SIZE`
+#### `WILDFLY_JMS_THREAD_POOL_MAX_SIZE`
 
-Maximum size of the pool of threads used by all [ActiveMQ clients](https://wildscribe.github.io/WildFly/18.0/subsystem/messaging-activemq/index.html) running inside this server
+The number of threads that the main thread pool of the ActiveMQ server has. -1 means no limit
 (optional, default is `30`).
 
-#### `WILDFLY_JMS_GLOBAL_CLIENT_SCHEDULED_THREAD_POOL_MAX_SIZE`
+#### `WILDFLY_JMS_SCHEDULED_THREAD_POOL_MAX_SIZE`
 
-Maximum size of the pool of scheduled threads used by all [ActiveMQ clients](https://wildscribe.github.io/WildFly/18.0/subsystem/messaging-activemq/index.html) running inside this server
-(optional, default is `5`).
-
-#### `WILDFLY_JMS_SERVER_THREAD_POOL_MAX_SIZE`
-
-The number of threads that the main thread pool of the [ActiveMQ server](https://wildscribe.github.io/WildFly/18.0/subsystem/messaging-activemq/server/index.html) has. -1 means no limit
-(optional, default is `30`).
-
-#### `WILDFLY_JMS_SERVER_SCHEDULED_THREAD_POOL_MAX_SIZE`
-
-The number of threads that the main scheduled thread pool of the [ActiveMQ server](https://wildscribe.github.io/WildFly/18.0/subsystem/messaging-activemq/server/index.html) has
-(optional, default is `5`).
-
-#### `WILDFLY_JMS_SERVER_POOLED_CONNECTION_FACTORY_MAX_POOL_SIZE`
-
-The maximum size for the pool of the [pooled connection factory of the ActiveMQ server](https://wildscribe.github.io/WildFly/18.0/subsystem/messaging-activemq/server/pooled-connection-factory/index.html)
-(optional, default is `20`).
-
-#### `WILDFLY_JMS_SERVER_POOLED_CONNECTION_FACTORY_THREAD_POOL_MAX_SIZE`
-
-The thread pool max size of the [pooled connection factory of the ActiveMQ server](https://wildscribe.github.io/WildFly/18.0/subsystem/messaging-activemq/server/pooled-connection-factory/index.html)
-(optional, default is `30`).
-
-#### `WILDFLY_JMS_SERVER_POOLED_CONNECTION_FACTORY_SCHEDULED_THREAD_POOL_MAX_SIZE`
-
-The scheduled thread pool max size of the [pooled connection factory of the ActiveMQ server](https://wildscribe.github.io/WildFly/18.0/subsystem/messaging-activemq/server/pooled-connection-factory/index.html)
+The number of threads that the main scheduled thread pool of the ActiveMQ server has
 (optional, default is `5`).
 
 #### `WILDFLY_MDB_STRICT_MAX_POOL_SIZE`
@@ -384,14 +355,14 @@ Dockerfile  weasis-pacs-connector.war
 ```
 ```console
 $ cat Dockerfile
-FROM dcm4che/dcm4chee-arc-psql:5.21.0
+FROM dcm4che/dcm4chee-arc-psql:5.20.0
 COPY weasis-pacs-connector.war /docker-entrypoint.d/deployments
 ```
 ```console
-$ docker build -t dcm4chee-arc-psql-with-weasis-pacs-connector:5.21.0 .
+$ docker build -t dcm4chee-arc-psql-with-weasis-pacs-connector:5.20.0 .
 Sending build context to Docker daemon  1.924MB
-Step 1/2 : FROM dcm4che/dcm4chee-arc-psql:5.21.0
-5.21.0: Pulling from dcm4che/dcm4chee-arc-psql
+Step 1/2 : FROM dcm4che/dcm4chee-arc-psql:5.20.0
+5.20.0: Pulling from dcm4che/dcm4chee-arc-psql
 c7b7d16361e0: Already exists
 b7a128769df1: Already exists
 1128949d0793: Already exists
@@ -407,10 +378,10 @@ b04b5d1d48ca: Already exists
 01e5664d91d6: Pull complete
 22267eaaa65e: Pull complete
 Digest: sha256:efd76ca282504bc3e7284cc544434dd769a84b45af5f96ff84ed462a6425780d
-Status: Downloaded newer image for dcm4che/dcm4chee-arc-psql:5.21.0
+Status: Downloaded newer image for dcm4che/dcm4chee-arc-psql:5.20.0
  ---> c84231dce4d2
 Step 2/2 : COPY weasis-pacs-connector.war /docker-entrypoint.d/deployments
  ---> b0f94489c0cb
 Successfully built b0f94489c0cb
-Successfully tagged dcm4chee-arc-psql-with-weasis-pacs-connector:5.21.0
+Successfully tagged dcm4chee-arc-psql-with-weasis-pacs-connector:5.20.0
 ```
