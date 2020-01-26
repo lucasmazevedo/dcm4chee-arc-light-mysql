@@ -15,7 +15,7 @@ RUN cd $JBOSS_HOME \
     && curl -fO http://cajuinaweb.com.br/dcm4chee-arc-ear-${DCM4CHEE_ARC_VERSION}-mysql-secure-ui.ear
 
 RUN curl -L https://downloads.mysql.com/archives/get/p/3/file/$MYSQL_CONNECTOR.tar.gz | tar xz \
-    && mv $MYSQL_CONNECTOR/$MYSQL_CONNECTOR-bin.jar $JBOSS_HOME/modules/com/mysql/main/
+    && mv $MYSQL_CONNECTOR/$MYSQL_CONNECTOR.jar $JBOSS_HOME/modules/com/mysql/main/
 
 COPY setenv.sh /
 COPY configuration /docker-entrypoint.d/configuration
