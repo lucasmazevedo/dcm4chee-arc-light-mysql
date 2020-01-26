@@ -1,8 +1,8 @@
 # Supported tags and respective `Dockerfile` links
 
-- [`5.20.0` (*5.20.0/Dockerfile*)](https://github.com/dcm4che-dockerfiles/dcm4chee-arc-psql/blob/5.20.0/Dockerfile)
-- [`5.20.0-secure` (*5.20.0-secure/Dockerfile*)](https://github.com/dcm4che-dockerfiles/dcm4chee-arc-psql/blob/5.20.0-secure/Dockerfile)
-- [`5.20.0-secure-ui` (*5.20.0-secure-ui/Dockerfile*)](https://github.com/dcm4che-dockerfiles/dcm4chee-arc-psql/blob/5.20.0-secure-ui/Dockerfile)
+- [`5.19.1` (*5.19.1/Dockerfile*)](https://github.com/dcm4che-dockerfiles/dcm4chee-arc-psql/blob/5.19.1/Dockerfile)
+- [`5.19.1-secure` (*5.19.1-secure/Dockerfile*)](https://github.com/dcm4che-dockerfiles/dcm4chee-arc-psql/blob/5.19.1-secure/Dockerfile)
+- [`5.19.1-secure-ui` (*5.19.1-secure-ui/Dockerfile*)](https://github.com/dcm4che-dockerfiles/dcm4chee-arc-psql/blob/5.19.1-secure-ui/Dockerfile)
 
 ## How to use this image
 
@@ -107,26 +107,22 @@ HTTP port of Wildfly Administration Console (optional, default is `9990`).
 
 HTTPS port of Wildfly Administration Console (optional, default is `9993`).
 
-#### `WILDFLY_ADMIN_OIDC` (Only effective by archive versions secured by Keycloak)
-
-Protect Wildfly Adminstration Console with Keycloak (optional, default is `true`).
-
-#### `WILDFLY_ADMIN_USER` (Ignored by archive versions secured by Keycloak and `WILDFLY_ADMIN_OIDC=true`)
+#### `WILDFLY_ADMIN_USER` (Ignored by archive versions secured by Keycloak)
 
 By default there is no admin user created so you won't be able to login to the Wildfly Administration Console.
 User to authenticate to the Wildfly Administration Console.
-(At archive versions secured by Keycloak and `WILDFLY_ADMIN_OIDC=true`, any user with assigned role `ADMINISTRATOR`
-is authorized to access the Wildfly Administration Console.)
+(At archive versions secured by Keycloak, any user with assigned role `ADMINISTRATOR` is authorized to access the
+Wildfly Administration Console.)
 
-#### `WILDFLY_ADMIN_USER_FILE` (Ignored by archive versions secured by Keycloak and `WILDFLY_ADMIN_OIDC=true`)
+#### `WILDFLY_ADMIN_USER_FILE` (Ignored by archive versions secured by Keycloak)
 
 User to authenticate to the Wildfly Administration Console via file input (alternative to WILDFLY_ADMIN_USER).
 
-#### `WILDFLY_ADMIN_PASSWORD` (Ignored by archive versions secured by Keycloak and `WILDFLY_ADMIN_OIDC=true`)
+#### `WILDFLY_ADMIN_PASSWORD` (Ignored by archive versions secured by Keycloak)
 
 User's password to use to authenticate to the Wildfly Administration Console.
 
-#### `WILDFLY_ADMIN_PASSWORD_FILE` (Ignored by archive versions secured by Keycloak and `WILDFLY_ADMIN_OIDC=true`)
+#### `WILDFLY_ADMIN_PASSWORD_FILE` (Ignored by archive versions secured by Keycloak)
 
 User's password to use to authenticate to the Wildfly Administration Console via file input (alternative to WILDFLY_ADMIN_PASSWORD).
 
@@ -247,16 +243,6 @@ This environment variable sets the maximum threads allowed for the managed-execu
 This environment variable sets the maximum pool size allowed for the PacsDS datasource in the Wildfly configuration
 (optional, default is `50`).
 
-#### `WILDFLY_JMS_THREAD_POOL_MAX_SIZE`
-
-The number of threads that the main thread pool of the ActiveMQ server has. -1 means no limit
-(optional, default is `30`).
-
-#### `WILDFLY_JMS_SCHEDULED_THREAD_POOL_MAX_SIZE`
-
-The number of threads that the main scheduled thread pool of the ActiveMQ server has
-(optional, default is `5`).
-
 #### `WILDFLY_MDB_STRICT_MAX_POOL_SIZE`
 
 Configured maximum number of message driven bean instances that the pool can hold at a given point in time.
@@ -355,14 +341,14 @@ Dockerfile  weasis-pacs-connector.war
 ```
 ```console
 $ cat Dockerfile
-FROM dcm4che/dcm4chee-arc-psql:5.20.0
+FROM dcm4che/dcm4chee-arc-psql:5.19.1
 COPY weasis-pacs-connector.war /docker-entrypoint.d/deployments
 ```
 ```console
-$ docker build -t dcm4chee-arc-psql-with-weasis-pacs-connector:5.20.0 .
+$ docker build -t dcm4chee-arc-psql-with-weasis-pacs-connector:5.19.1 .
 Sending build context to Docker daemon  1.924MB
-Step 1/2 : FROM dcm4che/dcm4chee-arc-psql:5.20.0
-5.20.0: Pulling from dcm4che/dcm4chee-arc-psql
+Step 1/2 : FROM dcm4che/dcm4chee-arc-psql:5.19.1
+5.19.1: Pulling from dcm4che/dcm4chee-arc-psql
 c7b7d16361e0: Already exists
 b7a128769df1: Already exists
 1128949d0793: Already exists
@@ -378,10 +364,10 @@ b04b5d1d48ca: Already exists
 01e5664d91d6: Pull complete
 22267eaaa65e: Pull complete
 Digest: sha256:efd76ca282504bc3e7284cc544434dd769a84b45af5f96ff84ed462a6425780d
-Status: Downloaded newer image for dcm4che/dcm4chee-arc-psql:5.20.0
+Status: Downloaded newer image for dcm4che/dcm4chee-arc-psql:5.19.1
  ---> c84231dce4d2
 Step 2/2 : COPY weasis-pacs-connector.war /docker-entrypoint.d/deployments
  ---> b0f94489c0cb
 Successfully built b0f94489c0cb
-Successfully tagged dcm4chee-arc-psql-with-weasis-pacs-connector:5.20.0
+Successfully tagged dcm4chee-arc-psql-with-weasis-pacs-connector:5.19.1
 ```
