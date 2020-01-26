@@ -2,6 +2,8 @@ FROM dcm4che/wildfly:18.0.1-8.0.1
 
 ENV DCM4CHEE_ARC_VERSION 5.20.0
 ENV DCM4CHE_VERSION ${DCM4CHEE_ARC_VERSION}
+ENV MYSQL_CONNECTOR="mysql-connector-java-8.0.18"
+
 
 RUN cd $JBOSS_HOME \
     && curl -f http://maven.dcm4che.org/org/dcm4che/jai_imageio-jboss-modules/1.2-pre-dr-b04/jai_imageio-jboss-modules-1.2-pre-dr-b04.tar.gz | tar xz \
@@ -11,6 +13,9 @@ RUN cd $JBOSS_HOME \
     && curl -f http://maven.dcm4che.org/org/dcm4che/dcm4che-jboss-modules/$DCM4CHE_VERSION/dcm4che-jboss-modules-${DCM4CHE_VERSION}.tar.gz | tar xz \
     && cd /docker-entrypoint.d/deployments \
     && curl -fO http://cajuinaweb.com.br/dcm4chee-arc-ear-${DCM4CHEE_ARC_VERSION}-mysql-secure-ui.ear
+
+RUN curl -L https://downloads.mysql.com/archives/get/p/3/file/$MYSQL_CONNECTOR.tar.gz | tar xz \
+    && mv $MYSQL_CONNECTOR/$MYSQL_CONNECTOR-bin.jar $JBOSS_HOME/modules/com/mysql/main/
 
 COPY setenv.sh /
 COPY configuration /docker-entrypoint.d/configuration
