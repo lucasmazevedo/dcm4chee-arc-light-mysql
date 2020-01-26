@@ -23,6 +23,7 @@ file_env() {
 }
 
 file_env 'LDAP_ROOTPASS' 'secret'
+file_env 'MYSQL_HOST' 'pacs'
 file_env 'MYSQL_USER' 'pacs'
 file_env 'MYSQL_PASSWORD' 'pacs'
 file_env 'KEYSTORE_PASSWORD' 'secret'
