@@ -249,7 +249,7 @@
                     </pool>
                     <security>
                         <user-name>root</user-name>
-                        <password></password>
+                        <password>pacs</password>
                     </security>
                 </datasource>
                 <drivers>

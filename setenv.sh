@@ -25,6 +25,7 @@ file_env() {
 file_env 'LDAP_ROOTPASS' 'secret'
 file_env 'MYSQL_USER' 'root'
 file_env 'MYSQL_DATABASE' 'pacsdb'
+file_env 'MYSQL_PASSWORD' 'pacs'
 file_env 'KEYSTORE_PASSWORD' 'secret'
 file_env 'KEY_PASSWORD' "${KEYSTORE_PASSWORD}"
 file_env 'TRUSTSTORE_PASSWORD' 'secret'
